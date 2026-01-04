@@ -1,0 +1,43 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('plot_lat_range_input.csv')
+
+def check_latitudinal_ranges(df, name):
+    lat_ranges = df.groupby('species')['Rotated latitude'].agg(['min', 'max'])
+    lat_ranges['range'] = lat_ranges['max'] - lat_ranges['min']
+    print(f"Latitudinal ranges for {name}:")
+    print(lat_ranges.sort_values(by='range', ascending=False))
+    print("\n")
+    print("Stats for latitudinal ranges:")
+    print(lat_ranges.describe())
+    return lat_ranges 
+
+def plot_genus_ranges_vlines(df, df_name):
+    """Plot vertical lines using matplotlib's vlines function"""
+    fig, ax = plt.subplots(figsize=(14, 8))
+    
+    # Get x positions (0, 1, 2, ... for each genus)
+    x_positions = range(len(df))
+    
+    # Plot vertical lines from min to max for each genus
+    for i, (genus, row) in enumerate(df.iterrows()):
+        ax.vlines(x=i, ymin=row['min'], ymax=row['max'], 
+                 colors='blue', linewidth=2)
+    
+    # Set x-axis labels to genus names
+    ax.set_xticks(x_positions)
+    # ax.set_xticklabels(df.index, rotation=45, ha='right')
+
+    # Set horizontal lines at y = 66, y = 23, y = -23. y = -66
+    ax.axhline(y=66, color='red', linestyle='--', linewidth=1)
+    ax.axhline(y=23, color='orange', linestyle='--', linewidth=1)
+    ax.axhline(y=-23, color='orange', linestyle='--', linewidth=1)
+    ax.axhline(y=-66, color='red', linestyle='--', linewidth=1)
+    
+    # Labels and title
+    ax.set_xlabel('Espécies')
+    ax.set_ylabel('Ocupação Latitudinal')
+    ax.set_title(f'Min-Max da Ocupação Latitudinal por espécie fossilizada de Serpentes')
+    ax.grid(True, alpha=0.3)
+    
