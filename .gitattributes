@@ -1,3 +1,4 @@
 .log filter=lfs diff=lfs merge=lfs -text
 *Ophidia_revabril_*_G_BDS_mcmc.log filter=lfs diff=lfs merge=lfs -text
 Ophidia_revabril_*.log filter=lfs diff=lfs merge=lfs -text
+DeepDive/genera_1MA/ophidia_genera_1ma_deepdive_input.csv filter=lfs diff=lfs merge=lfs -text
