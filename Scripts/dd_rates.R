@@ -1,3 +1,4 @@
+#Esse Script é de autoria de Shelley Wang (https://github.com/shelleylwang), especialista de pesquisa no Simões Lab na Universidade de Princeton (https://simoes-lab.com/people/)
 #!/usr/bin/env Rscript
 # Load necessary libraries
 #install.packages("pammtools")
